@@ -1,0 +1,18 @@
+<template>
+
+      <!-- form data template -->
+      <lightning-card title="Product Bundle creation steps"> 
+      <div class="slds-m-around_medium">
+        <lightning-record-form
+            object-api-name={objectName}
+            fields={objectFields}
+            columns="2"
+            oncancel={handleCancel}
+            onsuccess={handleSuccess}
+            onrowselection={addProductBundle}
+        >
+        </lightning-record-form>
+    </div>
+      </lightning-card>
+
+</template>

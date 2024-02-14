@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Quote Information" icon-name="standard:opportunity">
+        <template if:true={showDetails}>
+            <div class="slds-p-around_medium">
+
+                <template for:each={quoteDetails} for:item="quote">
+                    <div key={quote.id}>
+                        <p><strong>Quote Name:</strong> {quote.quoteName}</p>
+                        <p><strong>Status:</strong>{quote.quoteStatus}</p>
+                        <p><strong>Additional Cost:</strong>{quote.additionalCost}</p>
+                    </div>
+                </template>
+                <div>
+                    <lightning-button-group>
+                        <lightning-button label="Approve" onclick={handleApprove} disabled={isActionTaken}></lightning-button>
+                        <lightning-button label="Reject" onclick={handleReject} disabled={isActionTaken}></lightning-button>
+                    </lightning-button-group>
+                </div>
+            </div>
+        </template>
+        <template if:false={showDetails}>
+            <div class="slds-p-around_medium">
+                <p>Thank you for your response!</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

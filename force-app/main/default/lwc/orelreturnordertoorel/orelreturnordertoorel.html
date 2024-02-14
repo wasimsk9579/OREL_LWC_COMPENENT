@@ -1,0 +1,69 @@
+<template>
+   <template if:true={showTable}>
+    <lightning-card title=" Return Order" icon-name="standard:lead_list">
+        <!-- Search records -->
+    <div class="inputCard">
+        <lightning-input
+            style="width:30%;"
+            type="text"
+            placeholder="Search"
+            onchange={handleSearch}>
+        </lightning-input>
+    </div>
+    <!-- Datatable record displaying -->
+    <lightning-datatable
+    class="small-screen-datatable"
+    style="margin-bottom: 20px;"
+    key-field="Id"
+    data={allData}
+    columns={columns}
+    onrowaction={handleRowAction}
+   hide-checkbox-column></lightning-datatable>
+     <!-- Pagination block -->
+     <div class="pageHandler">
+        <lightning-button class="buttons" label="Previous" onclick={handlePrevious} disabled={isFirstPage}></lightning-button>
+        <div class="buttonText">Page {currentPage} of {totalPages}</div>
+        <lightning-button class="buttons" label="Next" onclick={handleNext} disabled={isLastPage}></lightning-button>
+    </div>
+</lightning-card>  
+   </template>  
+
+
+   
+  
+<!-- </template> -->
+
+<template if:false={showTable}>
+    
+    <div class="backButton">
+        <lightning-button variant="base" label="Back" title="Back to return order list" icon-name="utility:back" onclick={handleBackToReturnList} class="slds-m-left_x-small"></lightning-button>
+    </div>
+     <c-getproductinfo order-id={clickedreturnId}></c-getproductinfo> 
+</template>
+
+<template if:true={isvariable}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open custom-modal-size">
+            <div class="slds-modal__container">
+                <!-- Modal Header -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={handleCancel}>
+                        <span class="slds-assistive-text">Close</span>
+                    </lightning-button-icon>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Preview PDF</h2>
+                </header>
+    
+                <!-- Modal Body -->
+                <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                    <iframe src={iframeSrc} style="width: 100%; height:500px;"></iframe>
+                </div>
+                
+                <!-- Modal Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="brand" onclick={handleCancel} name="submit" class="slds-var-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+    </template>
+    
+</template>

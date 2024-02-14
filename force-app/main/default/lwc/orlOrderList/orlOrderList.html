@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Order Items" icon-name="standard:opportunity">
+        <lightning-datatable
+        style="margin-bottom: 20px;"
+        key-field="Id"
+        data={orderData}
+        columns={columns}
+        default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+        hide-checkbox-column></lightning-datatable>
+    
+    </lightning-card>
+</template>

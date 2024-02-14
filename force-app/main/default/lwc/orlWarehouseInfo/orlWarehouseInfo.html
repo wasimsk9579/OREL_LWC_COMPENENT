@@ -1,0 +1,48 @@
+<!-- orlOrderList.html -->
+<template>
+    <template if:true={showTable}>
+        <lightning-card title="Orders For Approval" icon-name="standard:order" class="custom-card">
+            <table class="custom-table" aria-label="Example table of Orders with custom styling">
+                <!-- Table headers -->
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Status</th>
+                        <th>Total Amount</th>
+                        <th>Account Name</th>
+                        <th>Return Type</th>
+                        <th>Order Items</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                    <!-- Iterate over the combinedData -->
+                    <template for:each={combinedData} for:item="orderWrapper" for:index="index">
+                        <tr key={orderWrapper.orderId}>
+                            <td>{orderWrapper.orderNumber}</td>
+                            <td>{orderWrapper.status}</td>
+                            <td>{orderWrapper.totalAmount}</td>
+                            <td>{orderWrapper.accountName}</td>
+                            <td>{orderWrapper.returnType}</td>
+                            <td>
+                                <!-- Iterate over the orderItems -->
+                                <template for:each={orderWrapper.orderItems} for:item="orderItem" for:index="index">
+                                    <div key={orderItem.productId}>
+                                        {orderItem.productName} - {orderItem.quantity}
+                                    </div>
+                                </template>
+                            </td>
+                            <td>
+                                <div class="button-class">
+                                    <lightning-button onclick={handleViewMore} variant="Brand" data-id={orderWrapper.orderId} label="View More"></lightning-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </lightning-card>
+    </template>
+    <!-- Add other templates as needed -->
+</template>

@@ -1,0 +1,85 @@
+<template >
+    <template if:false={variable}>
+		<lightning-card title="Purchase Orders" icon-name="standard:opportunity">
+		<div class="main">
+			<template if:true={showLoader}>
+				<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+			</template>
+			<div class="NewButton">
+				<lightning-layout>
+					<!-- Search Bar -->
+					<lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+						<div class="inputCard">
+							<lightning-input style="width:100%;" type="text" placeholder="Search" onchange={handleSearch}></lightning-input>
+						</div>
+					</lightning-layout-item>
+					<!-- "New" Button -->
+					<lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+						<div class="buttonAlignment">
+							<lightning-button variant="brand" label="New" title="New" onclick={handleOpenPopup}  disabled={isNew}></lightning-button>
+						</div>
+					</lightning-layout-item>
+				</lightning-layout>
+			</div>
+</div> 
+    <!-- Datatable record displaying -->	
+    <lightning-datatable
+    style="margin-bottom: 20px;"
+    key-field="Id"
+    data={allData}
+    columns={columns}
+	onrowaction={handleRowAction}
+    default-sort-direction={defaultSortDirection}
+            sorted-direction={sortDirection}
+            sorted-by={sortedBy}
+            onsort={onHandleSort}
+    hide-checkbox-column></lightning-datatable>
+
+    <!-- Pagination block -->
+	<div class="pageHandler">
+		<lightning-button class="buttons" label="Previous" onclick={handlePrevious} disabled={isFirstPage}></lightning-button>
+		<div class="buttonText">Page {currentPage} of {totalPages}</div>
+		<lightning-button class="buttons" label="Next" onclick={handleNext} disabled={isLastPage}></lightning-button>
+	</div>
+	<template if:true={isShowModal}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- modal header start -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModalPopup}>
+					<lightning-icon icon-name="utility:close"
+					alternative-text="close"
+					variant="inverse"
+					size="small" ></lightning-icon>
+					<span class="slds-assistive-text">Close</span>
+				</button>
+					<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Purchase Orders
+					</h2>
+				</header>
+
+				<!-- modal body start -->
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+					<c-orl-distributor-create-p-o onsubmitform={closeModalPopup}></c-orl-distributor-create-p-o>
+
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+    </lightning-card>
+    </template>
+
+	<template if:true={variable}>
+		<div>
+          <div class="backButton">
+            <lightning-button variant="base" label="Back" title="Back to return order list" icon-name="utility:back" onclick={handleBackToReturnList} class="slds-m-left_x-small"></lightning-button>
+        </div>
+		<div class="ScreenTwo">
+         <c-orel-p-otableproductdata oppo-id={clickedoppId}></c-orel-p-otableproductdata> 
+		</div>
+	</div>
+
+		
+	</template>
+</template>

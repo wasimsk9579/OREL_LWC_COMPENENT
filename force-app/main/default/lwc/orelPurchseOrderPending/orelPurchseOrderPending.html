@@ -1,0 +1,84 @@
+<template>
+    <template if:true={showTable}>
+        <lightning-card title="Purchase Order" icon-name="standard:opportunity">
+            <lightning-datatable class="custom-card"
+                key-field="Id"
+                data={combinedData}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column>
+            </lightning-datatable>  
+        </lightning-card>
+    </template>
+
+    <template if:false={showTable}>
+        <div class="backButton">
+            <lightning-button variant="base" label="Back" title="Back to retailer list" icon-name="utility:back" onclick={handleBackTooppoList} class="slds-var-m-left_x-small"></lightning-button>
+        </div>
+        <div class="ScreenTwo">
+        <div>
+            <c-orel-approve-or-reject-approval-process record-id={recId}></c-orel-approve-or-reject-approval-process>
+        </div>
+            <div class="approvalHistory">
+                <c-orl-p-o-approval-history oppo-id={clickedOPId}></c-orl-p-o-approval-history>
+            </div>
+        </div>
+    </template>
+
+</template>
+    <!-- Add other components or logic here for when showTable is false -->
+
+
+<!-- 
+<template>
+
+    <template if:true={showTable}>
+        <lightning-card title="Purchase Order For Approval" icon-name="standard:opportunity" class="custom-card">
+            <table class="custom-table" aria-label="Example table of Opportunities with custom styling">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="label-column" scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th class="label-column" scope="col">
+                            <div class="slds-truncate" title="StageName">StageName</div>
+                        </th>
+                        <th class="label-column" scope="col">
+                            <div class="slds-truncate" title="Amount">Amount</div>
+                        </th>
+                        <th class="label-column" scope="col">
+                            <div class="slds-truncate" title="Status__c">Status</div>
+                        </th>
+                        <th class="label-column" scope="col">
+                            <div class="slds-truncate" title="Action">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={combinedData} for:item="opplist" for:index="index">
+                        <tr key={opplist.Id}>
+                            <td>
+                                <div>{opplist.Opportunity.Name}</div>
+                            </td>
+                            <td>
+                                <div>{opplist.Opportunity.StageName }</div>
+                            </td>
+                            <td>
+                                <div>{opplist.Opportunity.Amount}</div>
+                            </td>
+                            <td>
+                                <div>{opplist.Opportunity.Status__c}</div>
+                            </td>
+                            <td>
+                                <div class="view-more-button">
+                                    <lightning-button onclick={handleEdit} variant="brand" data-id={opplist.Opportunity.Id} label="View More"></lightning-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+
+        </lightning-card>
+    </template> -->
+    

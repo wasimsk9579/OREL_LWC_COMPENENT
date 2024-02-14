@@ -1,0 +1,27 @@
+<!-- <template>
+    <lightning-card title="Product List">
+        <template if:true={Products2}>
+            <template for:each={Products2} for:item="Product2">
+                <div key={Product2.Id}>
+                    <lightning-input label="Name" value={Product2.Name} onchange={handleFirstNameChange}></lightning-input>
+                    <lightning-input label="Number" value={Product2.cgcloud__Consumer_Goods_Product_Code__c} onchange={handleLastNameChange}></lightning-input>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template> -->
+
+<template>
+    <lightning-card title="Products">
+        <div class="slds-m-around_medium">
+            <template if:true={products}>
+                <template for:each={products} for:item="product">
+                    <p key={product.Id}>{product.Name}</p>
+                </template>
+            </template>
+            <template if:false={products}>
+                <p>No products found.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <template if:false={variable}>
+        <lightning-card title="Credit Note" icon-name="standard:lead_list">
+            <!-- Search records -->
+        <div class="inputCard">
+            <lightning-input
+                style="width:30%;"
+                type="text"
+                placeholder="Search"
+                onchange={handleSearch}>
+            </lightning-input>
+        </div>
+        <!-- Datatable record displaying -->
+        <lightning-datatable
+        class="small-screen-datatable"
+        style="margin-bottom: 20px;"
+        key-field="Id"
+        data={allData}
+        columns={columns}
+        onsave={handleSave}
+        onrowaction={handleRowAction}
+        default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort}
+               
+        hide-checkbox-column></lightning-datatable>
+    
+        <!-- Pagination block -->
+        <div class="pageHandler">
+            <lightning-button class="buttons" label="Previous" onclick={handlePrevious} disabled={isFirstPage}></lightning-button>
+            <div class="buttonText">Page {currentPage} of {totalPages}</div>
+            <lightning-button class="buttons" label="Next" onclick={handleNext} disabled={isLastPage}></lightning-button>
+        </div>
+        </lightning-card>
+        </template>
+        
+</template>

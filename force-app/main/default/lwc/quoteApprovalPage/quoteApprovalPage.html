@@ -1,0 +1,13 @@
+<template>
+    <div>
+        <p>Quote ID: {quote.data.fields.Id.value}</p>
+        <p>Name: {quote.data.fields.Name.value}</p>
+        <p>Additional Cost: {quote.data.fields.Additional_Cost__c.value}</p>
+        <p>Email ID: {quote.data.fields.Contact__c.value}</p>
+
+        <lightning-button-group>
+            <lightning-button label="Approve" onclick={handleApprove}></lightning-button>
+            <lightning-button label="Disagree" onclick={handleDisagree}></lightning-button>
+        </lightning-button-group>
+    </div>
+</template>

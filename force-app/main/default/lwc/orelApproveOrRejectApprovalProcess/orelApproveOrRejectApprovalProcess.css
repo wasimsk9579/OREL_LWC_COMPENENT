@@ -1,0 +1,60 @@
+.text-area
+{
+    BORDER: 2PX SOLID;
+}
+.footer-button
+{
+    text-align: center;
+}
+.btn-wrapper
+{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+   
+}
+/* .conatiner
+{
+    margin-left: 15px;
+    margin-bottom: 20px;
+
+} */
+
+.responsive-modal {
+    max-width: 90%;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .text-area {
+    width: calc(100% - 22px); /* Adjust for padding, margins, and border width */
+    resize: vertical; /* Allow vertical resizing */
+    box-sizing: border-box; /* Include padding and borders in the width */
+    border: 1px solid #090909; /* Add a border style to ensure visibility */
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+.container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.label {
+    min-width: 100px; /* Adjust as needed */
+}
+
+.separator {
+    margin-right: 5px; /* Adjust spacing */
+}
+
+.value {
+    margin-left: 20px; /* Adjust spacing */
+}
+
+  

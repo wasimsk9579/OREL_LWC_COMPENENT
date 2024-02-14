@@ -1,0 +1,22 @@
+<template>
+    <div class="modal-container">
+        <div class="modal">
+            <div class="header">Enter Reject Reason</div>
+            <div class="content">
+                <textarea
+                    placeholder="Enter reason here..."
+                    value={rejectReason}
+                    oninput={handleReasonChange}
+                ></textarea>
+            </div>
+            <div class="footer">
+                <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                <lightning-button
+                    label="Reject"
+                    variant="brand"
+                    onclick={handleReject}
+                ></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

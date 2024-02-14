@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Product and Custom Object Search">
+        <lightning-input label="Search Product" type="search" onchange={handleInputChange}></lightning-input>
+        <lightning-button label="Search Product" onclick={handleSearchProduct}></lightning-button>
+        <lightning-button label="Search Custom Object" onclick={handleSearchCustomObject}></lightning-button>
+
+        <template if:true={searchProducts}>
+            <lightning-datatable key-field="Id" data={searchProducts} columns={columns} hide-checkbox-column></lightning-datatable>
+        </template>
+
+        <template if:true={getProductParts}>
+            <lightning-datatable key-field="Id" data={getProductParts} columns={Addedcolumns} hide-checkbox-column></lightning-datatable>
+        </template>
+    </lightning-card>
+</template>

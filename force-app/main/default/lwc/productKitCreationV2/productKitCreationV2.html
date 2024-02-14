@@ -1,0 +1,179 @@
+<!-- 
+* @description       : ProductKitCreationV2 is for creating Product Kit from UI.
+* @author            : Chinmay
+* @team              : OREL Team
+* @created On        : 15-11-2023
+* @last modified on  : 
+* @last modified by  : 
+ -->
+
+ <template>
+    <lightning-card variant="Narrow" >
+      <div >
+        <!-- Header section -->
+        <div class="slds-grid slds-wrap slds-p-around_small" >
+          <div class="bundleHeadingDiv slds-col slds-p-around_medium slds-box slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12" style="background-color: #d8d8d8;">
+            <h1 class="slds-align_absolute-center" style="font-size:20px !important">
+              <b>Product Kit</b>
+            </h1>
+          </div>
+        </div>
+        <!-- comboBoxSearch -->
+        <div class="slds-grid slds-wrap slds-p-around_small">
+          <div class="slds-col slds-p-around_medium slds-box slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_12-of-12" style="background-color: #d8d8d8;">
+            <div class="slds-form-element__control">
+              <div class="slds-combobox_container">
+                <!-- Search Input -->
+                <lightning-input disabled={isObjectSelectionRO} required={isRequired} label="Select Product" type="search" value={selectedProductName} onchange={handleInputChange} onclick={handleInputChange} onblur={handleOnBlur}></lightning-input>
+                <!-- Combobox copied from https://www.lightningdesignsystem.com/components/combobox/ -->
+                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                  <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                      <template for:each={autoCompleteOptions} for:item="option">
+                        <li key={option.Id} role="presentation" class="slds-listbox__item" onclick={handleOptionClick} data-value={option.Name} data-name={option.Name} data-productid={option.Id}>
+                          <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                            <span class="slds-media__figure slds-listbox__option-icon"></span>
+                            <span class="slds-media__body">
+                              <span class="slds-truncate" title={option.Description}>{option.Name}</span>
+                            </span>
+                          </div>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Row 1 -->
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_12-of-12" >
+            <div class="slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none modalBodyy">
+              <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+              </template>
+              <lightning-card>
+                <!-- <lightning-button label="Add Row" slot="actions" icon-name="utility:add" onclick={addRow}></lightning-button> -->
+                <div dir="rtl" class="slds-m-around_medium">
+                  <div class="slds-form-element">
+                    <label class="slds-checkbox_toggle slds-grid">
+                      <span class="slds-form-element__label slds-m-bottom_none">Show Tax</span>
+                      <input type="checkbox" name="checkbox-toggle-16" value={showTaxFields} aria-describedby="checkbox-toggle-16" checked={isToggleChecked} onchange={showTaxFieldsHandler} />
+                      <span id="checkbox-toggle-16" class="slds-checkbox_faux_container">
+                        <span class="slds-checkbox_faux"></span>
+                        <span class="slds-checkbox_on">Enabled</span>
+                        <span class="slds-checkbox_off">Disabled</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+            <div class="slds-table--header-fixed_container" style="height:250px;">
+                <div class="slds-m-around_medium slds-scrollable--y" style="height:100%;">
+                    
+                  <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table--header-fixed slds-box" aria-labelledby="element-with-table-label other-element-with-table-label">
+                    <thead class="slds-p-bottom_medium">
+                      <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="Item Code">Item Code</div>
+                        </th>
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="Item Name">Item Name</div>
+                        </th>
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="Qty">Qty</div>
+                        </th>
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="Qty">Sale Price</div>
+                        </th>
+                        <template lwc:if={showIncFields}>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Tax Rate">Tax Rate</div>
+                          </th>
+                        </template>
+                        <template lwc:if={showExFields}>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Price Ex Tax">Price Ex Tax</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Total Ex Tax">Total Ex Tax</div>
+                          </th>
+                        </template>
+                <!--        <template lwc:if={showIncFields}>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Price Inc Tax">Price Inc Tax</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Total Inc Tax">Total Inc Tax</div>
+                          </th>
+                        </template>    -->
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="Remove Product">Remove Product</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={renderProdList} for:item="obj">
+                        <tr class="inputRows" key={obj.Id}>
+                          <th data-label="Item Code" scope="row">
+                            <lightning-input type="text" class="fields" variant="label-hidden" label="Item Code" name="ItemCode" value={obj.ProductCode} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                          </th>
+                          <td data-label="Item Name">
+                            <lightning-input type="text" class="fields" variant="label-hidden" label="Item Name" name="ItemName" value={obj.Name} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                          </td>
+                          <td data-label="Qty">
+                            <lightning-input type="number" class="fields" variant="label-hidden" label="Qty" name="Qty" value={obj.Qty} data-id={obj.Id} onchange={updateValues}></lightning-input>
+                          </td>
+                          <td data-label="SalePrice">
+                            <lightning-input type="text" class="fields" variant="label-hidden" label="Sale Price" name="SalePrice" value={obj.Sale_Price__c} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                          </td>
+               <!--          <template lwc:if={showIncFields}>
+                            <td data-label="Tax Rate">
+                              <lightning-combobox name="TaxRate" data-id={obj.Id} value={obj.TaxRate} variant="label-hidden" placeholder="Tax Rate" options={taxRatePickValues.data.values} onchange={updateValues}></lightning-combobox>
+                             //  <lightning-input type="text" class="fields" variant="label-hidden" label="Tax Rate" name="TaxRate" value={obj.TaxRate} data-id={obj.Id} onchange={updateValues}></lightning-input> 
+                            </td>
+                          </template>
+                          <template lwc:if={showExFields}>
+                            <td data-label="Price Ex Tax">
+                              <lightning-input type="text" class="fields" variant="label-hidden" label="Price Ex Tax" name="PriceExTax" value={obj.PriceExTax} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                            </td>
+                            <td data-label="Total Ex Tax">
+                              <lightning-input type="text" class="fields" variant="label-hidden" label="Total Ex Tax" name="TotalExTax" value={obj.TotalExTax} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                            </td>
+                          </template>
+                          <template lwc:if={showIncFields}>
+                            <td data-label="Price Inc Tax">
+                              <lightning-input type="text" class="fields" variant="label-hidden" label="Price Inc Tax" name="PriceIncTax" value={obj.PriceIncTax} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                            </td>
+                            <td data-label="Total Inc Tax">
+                              <lightning-input type="text" class="fields" variant="label-hidden" label="Total Inc Tax" name="TotalIncTax" value={obj.TotalIncTax} data-id={obj.Id} onchange={updateValues} disabled></lightning-input>
+                            </td>
+                          </template>   -->
+                          <td data-label="Remove Product">
+                            <lightning-button-icon icon-name="action:delete" alternative-text="Remove" title="Remove Product" name="DeleteId" value={obj.DeleteId} data-id={obj.Id} onclick={handleDeleteAction}></lightning-button-icon>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+              </lightning-card>
+            </div>
+            <div slot="footer" class="slds-p-around_small">
+                <div class="slds-p-around_medium slds-box slds-align_absolute-center"  style="background-color: #d8d8d8;">
+                    <lightning-button variant="neutral" label="Cancel" onclick={handleCancelButton} disabled={isSaveDisabled}></lightning-button> &nbsp; 
+                    <lightning-button variant="brand" label="Save" onclick={handleSaveAction} disabled={isSaveDisabled}></lightning-button>
+                </div> 
+            </div>
+          </div>
+        </div>
+        <!-- Row 2
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12"></div>
+          <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12"></div>
+          <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12"></div>
+        </div> -->
+      </div>
+    </lightning-card>
+  </template>

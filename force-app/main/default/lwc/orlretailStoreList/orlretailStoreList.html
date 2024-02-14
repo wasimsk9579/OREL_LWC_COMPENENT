@@ -1,0 +1,86 @@
+<template>
+    <template  if:true={showTable}>
+    <lightning-card title="Retail Stores For Approval" icon-name="standard:opportunity" class="custom-card">
+        <lightning-datatable
+            key-field="Id"
+            data={combineddataitems}
+            columns={columns}
+            onrowaction={handleRowAction}>
+        </lightning-datatable>  
+    </lightning-card>
+    </template>
+
+        <!-- <template if:true={showTable}>
+            <lightning-card title="Retail Stores For Approval" icon-name="standard:opportunity" class="custom-card">
+                <table class="custom-table" aria-label="Example table of Opportunities with custom styling">
+                    <thead>
+                        <tr class="slds-line-height_reset column-font" >
+                            <th class="label-column" scope="col">
+                                <div class="slds-truncate" title="Name"> Retailer Name</div>
+                            </th>
+                            <th class="label-column" scope="col">
+                                <div class="slds-truncate" title="Delivery Method">Delivery Method</div>
+                            </th>
+                            <th class="label-column" scope="col">
+                                <div class="slds-truncate" title="Priority">Priority</div>
+                            </th>
+                            <th class="label-column" scope="col">
+                                <div class="slds-truncate" title="Store Type">Store Type</div>
+                            </th>
+                            <th class="label-column" scope="col">
+                                <div class="slds-truncate" title="Approval Status">Approval Status</div>
+                            </th>
+                            <th class="label-column" scope="col">
+                                <div class="slds-truncate" title="Action">Action</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={combinedData} for:item="retstr" for:index="index">
+                            <tr key={retstr.Id}>
+                                 <td>
+                                    <div>{retstr.RetailStore.Name}</div>
+                                </td>
+                                <td>
+                                    <div>{retstr.RetailStore.Retail_Store__r.DeliveryMethod}</div>
+                                </td>
+                                <td>
+                                    <div>{retstr.RetailStore.Retail_Store__r.Priority}</div>
+                                </td>
+                                <td>
+                                    <div>{retstr.RetailStore.Retail_Store__r.StoreType}</div>
+                                </td> 
+                                <td>
+                                    <div>{retstr.ProcessInstance.Status}</div>
+                                </td>
+                                 <td>
+                                    <div class="view-more-button">
+                                        <lightning-button onclick={handleEdit} variant="brand" data-id={retstr.RetailStore.Id} label="View More"></lightning-button>
+                                    </div>
+                                </td> 
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+    
+            </lightning-card>
+        </template> -->
+
+
+
+    <template  if:false={showTable}>
+        <div class="backButton">
+            <lightning-button variant="base" label="Back" title="Back to retailer list" icon-name="utility:back" onclick={handleBackToRetailerList} class="slds-m-left_x-small"></lightning-button>
+        </div>
+        <!-- <c-orl-reatiler-approval retailer-id={clickedRetailerId}></c-orl-reatiler-approval> -->
+        <div class="ScreenTwo">
+            <div class="approvalInfo">
+                <c-orl-reatiler-approval reatiler-id={clickedRetailerId}></c-orl-reatiler-approval>
+            </div>
+            <div class="approvalHistory">
+                <c-orl-retailer-approval-history reatiler-record-id={clickedRetailerId}></c-orl-retailer-approval-history>
+            </div>
+        </div>
+        
+    </template>
+</template>

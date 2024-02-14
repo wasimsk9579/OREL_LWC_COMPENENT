@@ -1,0 +1,12 @@
+<template>
+    <template if:true={productData}>
+            <lightning-datatable
+                    key-field= "Id"
+                    columns={columns}
+                    data={productData}
+                    hide-checkbox-column
+                    show-row-number-column>
+                </lightning-datatable>
+            </template>
+
+</template>

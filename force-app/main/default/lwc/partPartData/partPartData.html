@@ -1,0 +1,14 @@
+<template>
+    <div style="height: 300px;">
+        <lightning-datatable 
+                            key-field="Id"
+                             data={data}
+                             show-row-number-column
+                             onsave={handleSave}
+                             draft-values={saveDraftValue}
+                             hide-checkbox-column
+                             columns={columns}>
+            </lightning-datatable>
+    </div>
+    
+</template>

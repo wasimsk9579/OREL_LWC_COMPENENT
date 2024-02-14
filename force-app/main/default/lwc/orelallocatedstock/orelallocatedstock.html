@@ -1,0 +1,62 @@
+<template>
+    <lightning-card variant="Narrow" title="Allocate Stock" icon-name="standard:account">
+        <div if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+
+        <div class="table-container slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Product Name">Product Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Account Name">Requested Quantity</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Close Date">Inventory Available</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Close Date"> Unit Price</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate">Allocate Stock</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={combinedData} for:item="combinedItem" for:index="index">
+                        <tr key={combinedItem.Id}>
+                            <td>
+                                <div>{combinedItem.ProductName}</div>
+                            </td>
+                            <td>
+                                <div>{combinedItem.RequestedQuantity}</div>
+                            </td>
+                            <td>
+                                <div>{combinedItem.InventoryBalance}</div>
+                            </td>
+                            <td>
+                                <div>{combinedItem.ListPrice}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate">
+                                    <lightning-input type="number" variant="standard" name="ProductAllocated" value={combinedItem.allocatedquantity} data-id={index} onchange={handleQuantityChange}></lightning-input>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footerButtons slds-p-around_medium">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small" class="slds-text-align_right">
+                    <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,164 @@
+<template>
+    <template if:false={variable}>
+        <lightning-card title=" Retail Store Order" icon-name="standard:lead_list">
+            <!-- Search records -->
+            <div class="inputCard">
+                <lightning-input
+                    style="width:30%;"
+                    type="text"
+                    placeholder="Search"
+                    onchange={handleSearch}>
+                </lightning-input>
+            </div>
+  
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table--header-fixed slds-box" aria-labelledby="element-with-table-label other-element-with-table-label">
+                <thead class="slds-p-bottom_medium">
+            <tr class="slds-line-height_reset">
+              <th class="" scope="col">
+                <div class="slds-truncate" title="Name">Name</div>
+              </th>
+              <th class="" scope="col">
+                <div class="slds-truncate" title="Order Template">Order Template</div>
+              </th>
+              <th class="" scope="col">
+                <div class="slds-truncate" title="Customer">Customer</div>
+              </th>
+              <th class="" scope="col">
+                <div class="slds-truncate" title="Order date">Order date</div>
+              </th>
+              
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Initiate Date">Initiate Date</div>
+                </th>
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Delivery Date">Delivery Date</div>
+                </th>
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Delivery Recipient">Delivery Recipient</div>
+                </th>      
+                <th>
+                  <div class="slds-truncate" title="Preview PDF">View PDF</div>
+                </th>  
+                <th>
+                  <div class="slds-truncate" title="View Products">View products</div> 
+                </th> 
+                <th>
+                    <div class="slds-truncate" title="Invoice">Invoice</div> 
+                  </th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <tr style="border-bottom: 1px solid #ddd; height: 10px;"></tr> <!-- Add space and horizontal line -->
+            <template for:each={allData} for:item="obj">
+              <tr class="inputRows" key={obj.Id}>
+                <th data-label="Name" scope="row" data-id={obj.Id} >{obj.Name}</th>
+                <th data-label="Order Template" data-id={obj.Id} >{obj.cgcloud__Order_Template__r.Name}</th>
+                <th data-label="Customer" data-id={obj.Id} >{obj.cgcloud__Order_Account__r.Name}</th>
+                <td data-label="Order date" data-id={obj.Id} >{obj.cgcloud__Order_Date__c}</td>
+                  <td data-label="Initiate Date" data-id={obj.Id}>{obj.cgcloud__Initiation_Date__c}</td>
+                  <td data-label="Delivery Date" data-id={obj.Id}>{obj.cgcloud__Delivery_Date__c} </td>
+                  <td data-label="Delivery Recipient" data-id={obj.Id}> {obj.cgcloud__Delivery_Recipient__r.Name}</td>
+                  <td>
+                    <div>
+                      <lightning-button variant="brand" name="GRN Generated" label="View PDF" onclick={handlepdf} data-id={obj.Id}></lightning-button>
+                    </div>
+                  </td>  
+                  <td>
+                    <div>
+                      <lightning-button variant="brand" name="View products" label="View products" onclick={handleproduct} data-id={obj.Id} ></lightning-button>
+                    </div>
+                  </td> 
+                  <td>
+                    <div>
+                      <lightning-button variant="brand" name="Invoice" label="Invoice" onclick={handleinvoice} data-id={obj.Id} ></lightning-button>
+                    </div>
+                  </td>        
+              </tr>
+            </template>
+          </tbody>
+        </table>
+        
+   <!-- Pagination block -->
+   <div class="pageHandler">
+    <lightning-button class="buttons" label="Previous" onclick={handlePrevious} disabled={isFirstPage}>
+    </lightning-button>
+    <div class="buttonText">Page {currentPage} of {totalPages}</div>
+    <lightning-button class="buttons" label="Next" onclick={handleNext} disabled={isLastPage}>
+    </lightning-button>
+  </div>
+  </lightning-card>
+  </template>
+  
+        <template if:true={isvariable}>
+      
+          <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open custom-modal-size">
+              <div class="slds-modal__container">
+                  <!-- Modal Header -->
+                  <header class="slds-modal__header">
+                      <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={handleCancel}>
+                          <span class="slds-assistive-text">Close</span>
+                      </lightning-button-icon>
+                      <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Preview PDF</h2>
+                  </header>
+      
+                  <!-- Modal Body -->
+                  <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                      <iframe src={iframeSrc} style="width: 100%; height:500px;"></iframe>
+                  </div>
+                  
+                  <!-- Modal Footer -->
+                  <footer class="slds-modal__footer">
+                      <lightning-button label="Cancel" variant="brand" onclick={handleCancel} name="submit" class="slds-var-m-left_x-small"></lightning-button>
+                  </footer>
+              </div>
+          </section>
+      </template>
+   
+  
+      <template if:true={prvariable}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open custom-modal-size full-screen-modal">
+          <div class="slds-modal__container slds-modal__container_full-screen">
+            <!-- Modal Header -->
+            <header class="slds-modal__header">
+              <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Product Details</h2>
+            </header>
+    
+            <!-- Modal Body -->
+            <div class="slds-modal__content slds-var-p-around_medium slds-size_full">
+              <!-- Your specific content for the 'variable' template -->
+              <c-getproductinfo order-id={clickedorderId}></c-getproductinfo> 
+            </div>
+    
+            <!-- Modal Footer -->
+            <footer class="slds-modal__footer">
+              <lightning-button label="Close" variant="brand" onclick={handleVariableClose} name="submit" class="slds-var-m-left_x-small"></lightning-button>
+            </footer>
+          </div>
+        </section>
+      </template>
+
+
+      <template if:true={invvariable}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open custom-modal-size full-screen-modal">
+          <div class="slds-modal__container slds-modal__container_full-screen">
+            <!-- Modal Header -->
+            <header class="slds-modal__header">
+              <h2 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">Invoice</h2>
+            </header>
+    
+            <!-- Modal Body -->
+            <div class="slds-modal__content slds-var-p-around_medium slds-size_full">
+              <!-- Your specific content for the 'variable' template -->
+              <c-orelinvoicetable order-id={clickinvoiceId}></c-orelinvoicetable> 
+            </div>
+    
+            <!-- Modal Footer -->
+            <footer class="slds-modal__footer">
+              <lightning-button label="Close" variant="brand" onclick={handleVariableClose} name="submit" class="slds-var-m-left_x-small"></lightning-button>
+            </footer>
+          </div>
+        </section>
+      </template>
+      
+  </template>

@@ -1,0 +1,78 @@
+<template>
+    <div class="slds-card slds-m-horizontal_large">
+        <!-- Spinner -->
+        <div class="slds-is-relative slds-m-around_large slds-align_absolute-center"
+            style="min-height: 200px; !important;" if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..." variant="brand"></lightning-spinner>
+        </div>
+        <!-- /Spinner -->
+
+        <template if:false={showSpinner}>
+            <!-- Header -->
+            <div class="slds-card__header slds-p-bottom_small">
+                <header>
+                    <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+                        <lightning-progress-step label="First Page" value="1" onclick={nextPage}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Second Page" value="2" onclick={nextPage}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Third Page" value="3" onclick={nextPage}>
+                        </lightning-progress-step>
+                    </lightning-progress-indicator>
+                </header>
+            </div>
+            <!-- /Header -->
+
+            <!-- First Page -->
+            <template if:true={showFirstPage}>
+                <div class="slds-p-around_large" style="height: 170px; !important;font-size:15px">
+                    <ul style="list-style-type:disc;">
+                        <li >To create the Product Bundle we need to create the master product first.</li>
+                        <li>To create the the master product need to understand what all are required fields / data to 
+                                create the master product. </li>
+                        <li>Pleaase fill the information mentioned in the Master product form to create the Bundle.</li>
+                        <li> After filling all the information, please click on the save to enter the product in data base.</li>
+                      </ul>
+                </div>
+            </template>
+            <!-- /First Page -->
+
+            <!-- Second Page -->
+            <template if:true={showSecondPage}>
+                    <div class="slds-p-around_large" style="height: 170px; !important;font-size:15px">
+                        <ul style="list-style-type:disc;">
+                           <li>After creating the master product, please search the available product bundles from the system.</li> 
+                            <li>select the checkbox of the bundle whose child components / products you want to search.</li> 
+                            <li> Once yoy select the existing product bundle you will be able to see the basic information regarding 
+                                    to that child product.  </li>
+                            <li> you can select the products which you want to add to the master product by selecting the checkbox. </li>
+                            <li> After selecting the products click on the Add Products. </li>
+                        </ul>
+                    
+                </div>
+            </template>
+            <!-- /Second Page -->
+
+            <!-- Third Page -->
+            <template if:true={showThirdPage}>
+                <div class="slds-p-around_large" style="height: 170px; !important;font-size:15px">
+                    <ul style="list-style-type:disc;">
+                         <li>Once you click on the Add Products you will be able to see the selected products in the next table 
+                                with editable options.  </li> 
+                         <li> You can edit the fields you want as per the client requirement and click on save to Add that edited 
+                                products to the master Product. </li>   
+                     </ul>
+                
+            </div>
+            </template>
+            <!-- /Third Page -->
+
+            <!-- Footer -->
+            <footer class="slds-modal__footer slds-text-align_right" style="padding: 0.50rem 1rem;">
+                <lightning-button class="slds-p-right_xx-small" label="Back" variant="neutral" onclick={previousPage}>
+                </lightning-button>
+                <lightning-button label="Next" variant="brand" onclick={nextPage}></lightning-button>
+            </footer>
+        </template>
+    </div>
+</template>

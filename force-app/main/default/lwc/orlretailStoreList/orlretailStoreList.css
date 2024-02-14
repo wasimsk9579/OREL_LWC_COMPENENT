@@ -1,0 +1,158 @@
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 35px;
+}
+
+.custom-table th {
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #2f2d2d;
+    line-height: 2;
+}
+
+.custom-table th.label-column {
+    border-right: 1px solid #ddd;
+}
+
+.custom-table th.label-column:last-child {
+    border-right: none;
+}
+
+.custom-table td {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    line-height: 1;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: transparent;
+}
+
+.custom-table th div,
+.custom-table td div {
+    padding: 0.25rem;
+    word-wrap: break-word;
+}
+
+.custom-card,
+.custom-card .custom-table {
+    width: 100%; /* Adjusted for responsiveness */
+    min-width: 100%; /* Adjusted for responsiveness */
+}
+
+.reatilStoreTable {
+    margin-top: 150px;
+}
+
+.ScreenTwo {
+    margin-top: 13px;
+}
+
+.approvalHistory {
+    margin-top: 20px;
+}
+
+td {
+    padding: 5px;
+}
+
+
+
+/* Existing styles for larger screens */
+
+/* Media Query for screens between 561px and 640px */
+@media only screen and (max-width: 640px) {
+    .custom-table {
+        font-size: 11px; /* Adjust font size for better readability */
+    }
+
+    /* Reduce padding for compactness */
+    .custom-table th,
+    .custom-table td {
+        padding: 5px;
+    }
+
+    /* Adjust the width of all table columns */
+    .custom-table th,
+    .custom-table td {
+        width: 25%; /* Each column takes 25% of the table width */
+        word-wrap: break-word; /* Allow long text to wrap */
+    }
+}
+
+/* Media Query for screens below 561px */
+@media only screen and (max-width: 560px) {
+    .custom-table {
+        font-size: 10px; /* Further reduce font size for smaller screens */
+    }
+
+    /* Adjust the width of all table columns */
+    .custom-table th,
+    .custom-table td {
+        width: 50%; /* Each column takes 50% of the table width */
+        word-wrap: break-word; /* Allow long text to wrap */
+    }
+}
+
+/* Existing styles for larger screens */
+
+/* Media Query for screens below 520px */
+/* Existing styles for larger screens */
+
+/* Media Query for screens below 520px */
+@media only screen and (max-width: 520px) {
+    .custom-table {
+        font-size: 9px; /* Reduce font size for smaller screens */
+    }
+
+    /* Adjust padding for cell content */
+    .custom-table th,
+    .custom-table td {
+        padding: 3px; /* Reduce padding for compactness */
+    }
+}
+
+
+/* Existing styles for larger screens */
+
+/* Media Query for screens below 470px */
+@media only screen and (max-width: 470px) {
+    .custom-table {
+        font-size: 7px; /* Reduce font size for smaller screens */
+    }
+
+    /* Adjust padding for cell content */
+    .custom-table th,
+    .custom-table td {
+        padding: 2px; /* Reduce padding for compactness */
+    }
+
+    /* Adjust button size and padding */
+    .slds-button {
+        padding: 3px 7px; /* Adjust button padding */
+        font-size: 7px; /* Reduce button font size */
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+    .custom-table {
+        font-size: 6px; /* Reduce font size for smaller screens */
+        word-wrap: break-word;
+    }
+
+    /* Adjust padding for cell content */
+    .custom-table th,
+    .custom-table td {
+        padding: 1px; /* Reduce padding for compactness */
+    }
+
+    /* Adjust button size and padding */
+    .slds-button {
+        padding: 1px 4px; /* Adjust button padding */
+        font-size: 6px; /* Reduce button font size */
+    }
+}

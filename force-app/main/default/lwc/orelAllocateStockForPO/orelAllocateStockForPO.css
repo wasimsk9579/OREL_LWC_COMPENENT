@@ -1,0 +1,10 @@
+.resetWrapper{
+	position: relative;
+}
+.resetButton{
+	position: absolute;
+	right: 0;
+}
+.footerButtons{
+	margin: 20px;
+}

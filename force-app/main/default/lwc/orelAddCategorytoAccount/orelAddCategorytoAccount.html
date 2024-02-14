@@ -1,0 +1,53 @@
+<!-- 
+<template>
+    <div>
+        <lightning-card title="Select Category Products">
+            <div class="slds-p-around_small">
+                <lightning-dual-listbox
+                    name="categoryProducts"
+                    label="Category Products"
+                    source-label="Available"
+                    selected-label="Selected"
+                    options={availableCategoryProducts}
+                    value={selectedCategoryProducts}
+                    onchange={handleCategoryProductSelection}
+                ></lightning-dual-listbox>
+            </div>
+            <div class="slds-grid slds-grid_align-end slds-p-around_small">
+                <div class="slds-col">
+                    <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleCancel}></lightning-button>
+                </div>
+                <div class="slds-col">
+                    <lightning-button variant="brand" label="Save" title="Save" onclick={handleSave}></lightning-button>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template> -->
+
+<template>
+    <div>
+        <lightning-card title="Select Category Products">
+            <div class="slds-p-around_small">
+                <lightning-dual-listbox
+                    name="categoryProducts"
+                    label="Category Products"
+                    source-label="Available"
+                    selected-label="Selected"
+                    options={availableCategoryProducts}
+                    value={selectedCategoryProducts}
+                    onchange={handleCategoryProductSelection}
+                ></lightning-dual-listbox>
+            </div>
+            <div class="slds-grid slds-grid_align-end slds-p-around_small button-classs">
+                <div class="slds-col">
+                    <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleCancel}></lightning-button>
+                </div>
+                <div class="slds-col slds-p-left_small">
+                    &nbsp; <!-- Empty space for additional padding -->
+                    <lightning-button variant="brand" label="Save" title="Save" onclick={handleSave}></lightning-button>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

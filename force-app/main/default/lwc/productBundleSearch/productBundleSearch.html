@@ -1,0 +1,92 @@
+<template>
+    
+           <template if:true={objectName}>
+            <lightning-card title="Product Bundle creation steps"> 
+                <c-product-bundle-progress-indicator></c-product-bundle-progress-indicator>      
+            </lightning-card>
+           </template>
+        <lightning-card title="Create Master Product" style="height: 100vh;">
+
+            
+
+        <!-- form data template -->
+        <div class="slds-m-around_medium">
+            <lightning-record-form
+                object-api-name={objectName}
+                record-type-id={recordTypeId}
+                fields={objectFields}
+                columns="2"
+                oncancel={handleCancel}
+                onsuccess={handleSuccess}
+                onrowselection={addProductBundle}
+            >
+            </lightning-record-form>
+            <div class="inputSearch">
+                <lightning-input class="searchBundleInput" placeholder='Search product bundle here... ' onchange={handleSearchProductBundle}>
+                </lightning-input>
+            </div>
+        </div>
+
+        <!-- Product bandle datatable -->
+        <template if:true={variable}>
+            <template if:true={searchedProductBundle}>
+                <div class="slds-p-around_medium lgc-bg">
+                    <div class="datatable-container">
+                        <h2 class="datatable-title" style="font-weight: bold;">Select Product Bundles</h2>
+                    <lightning-datatable
+                        key-field='Id'
+                        data={searchedProductBundle}
+                        columns={productBundleColumn}
+                        onrowselection={handlerowselection}
+                        hide-row-number-column
+                    ></lightning-datatable>
+                    </div>
+                    <div class="pageHandler">
+                        <lightning-button class="buttons" label="Previous" onclick={handlePrevious} disabled={isFirstPage}></lightning-button>
+                        <div class="buttonText">Page {currentPage} of {totalPages}</div>
+                        <lightning-button class="buttons" label="Next" onclick={handleNext} disabled={isLastPage}></lightning-button>
+                </div>
+                </div>
+                <!-- product bundle parts datatable -->
+            </template>              
+            <template if:true={productBundlePartsData}>
+                <div class="slds-p-around_medium lgc-bg">
+                    <div class="datatable-container">
+                        <h1 class="datatable-title" style="font-weight: bold;">Available products in Selected Bundles</h1>
+               <lightning-datatable
+               key-field='Id'
+               data={productBundlePartsData}
+               columns={productBundlePartsColumn}
+               onrowselection={onProductPartRowSelection}
+               hide-row-number-column
+            ></lightning-datatable>
+            </div>
+            <div style='display: flex; justify-content: center; align-items: center; margin-top:20px'>
+                <lightning-button variant='outline' label='Add Products' onclick={handleOnclickProductParts} >
+                </lightning-button>
+              </div>
+        </div> 
+            </template>
+
+            <!-- selected product parts datatable -->
+            <template if:true={isSelected}>
+                <div class="slds-p-around_medium lgc-bg">
+                    <div class="datatable-container">
+                        <h2 class="datatable-title" style="font-weight: bold;">Selected Products</h2>
+                    <lightning-datatable
+                        key-field='Id'
+                        data={selectedProductsPartsData}
+                        columns={selectedChildPartRowsColumn}
+                        onsave={handleSave}
+                        hide-row-number-column
+                    ></lightning-datatable>
+                    </div>
+                </div>
+                <!-- <div style='display: flex; justify-content: center; align-items: center; margin-top:20px'>
+                    <lightning-button variant='outline' label='Add Products' onclick={CreateProductParts} >
+                    </lightning-button>
+                  </div> -->
+            </template>
+        </template>
+    </lightning-card>
+</template>

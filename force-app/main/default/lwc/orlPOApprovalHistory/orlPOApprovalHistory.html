@@ -1,0 +1,11 @@
+<template>
+    <lightning-card icon-name="standard:account" title="Approval History" variant="base">
+        <lightning-datatable class="slds-max-medium-table_stacked"
+                key-field="Id"
+                data={POApprovalData}
+                columns={columns}
+                hide-checkbox-column>
+        </lightning-datatable>
+    </lightning-card>
+    
+</template>

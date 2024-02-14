@@ -1,0 +1,75 @@
+<template>
+    <template if:true={page1}>
+        <lightning-datatable
+            key-field="Id"
+            data={productsData}
+            columns={columns}
+            selected-rows={preSelectedRows}
+            rowselection={handleRowSelected}
+            onrowselection={handleRowSelection}>
+        </lightning-datatable>
+
+        <!-- Row 1 -->
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                <!-- <lightning-button variant="destructive" label="Close" onclick={handleCancle} class="slds-m-left_x-small"></lightning-button> -->
+            </lightning-layout-item>
+            <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext} class="slds-m-left_x-small nextButton"></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+
+    <template if:false={page1}>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Name">Product Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Name">Product Code</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Account Name">Unit Price</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Close Date">Quantity</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={selectedProducts} for:item="product" for:index="index">
+                    <tr key={product.Id}>
+                        <td>
+                            <div>{product.Name}</div>
+                        </td>
+                        <td>
+                            <div>{product.ProductCode}</div>
+                        </td>
+                        <td>
+                            <div>LKR {product.productPrice}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">
+                                <lightning-input type="number" variant="standard" name="quantity" value={product.AskedQuantity} placeholder="Enter quantity here" data-id={index} onchange={handleQuantityChange}></lightning-input>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <!-- Row 1 -->
+        <lightning-layout multiple-rows>
+            <div if:true={showSpinner} class="Spinner">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>    
+            <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                <lightning-button variant="brand" label="Back" onclick={handleBackToPage1} class="backButton"></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                <lightning-button variant="brand" label="Submit" title="submit" onclick={handleSubmit} class="submitButton"></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

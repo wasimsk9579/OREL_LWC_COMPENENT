@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Product Parts">
+        <template if:true={productParts}>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-heading_label">
+                        <th scope="col">Part Name</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={productParts} for:item="part">
+                        <tr key={part.Id}>
+                            <td>{part.Name}</td>
+                            <td>{part.Quantity}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+    </lightning-card>
+</template>

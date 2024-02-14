@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Product Search" style="height: 100vh;">
+        <div class="slds-m-around_medium" >
+            <lightning-record-form
+                object-api-name={objectName}
+                record-type-id={recordTypeId}
+                fields={objectFields}
+                columns="2"
+                oncancel={handleCancel}
+                onsuccess={handleSuccess}
+                onrowselection={handleRowSelection}
+            >
+            </lightning-record-form>
+            <div class="inputSearch">
+                <lightning-input class="searchBundleInput" placeholder="Search Products" value={searchTerm} onchange={handleSearchTermChange}>
+                </lightning-input>
+            </div>
+        </div>
+            <template if:true={products}>
+
+                <div class="slds-p-around_medium lgc-bg">
+                    <template if:true={isSelected}>
+                        <c-editable-product-parts
+                        selectedproduct={selectedProduct}
+                        oneditssaved={handleEditSaved}>
+                    </c-editable-product-parts>
+                    </template>
+                    <lightning-tree-grid data={gridData} columns={gridColumns} key-field="childProductItemName" onrowselection={handlerowselection}>
+                   </lightning-tree-grid>
+                   <!-- if selected -->
+                    
+                </div>
+        </template>
+    </lightning-card>
+
+</template>

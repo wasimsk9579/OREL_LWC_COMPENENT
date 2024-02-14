@@ -1,0 +1,19 @@
+.text-area
+{
+    BORDER: 2PX SOLID;
+}
+.footer-button
+{
+    text-align: center;
+}
+.bt-wrapper
+{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+   
+}
+.conatiners
+{
+    margin-left: 15px;  
+}

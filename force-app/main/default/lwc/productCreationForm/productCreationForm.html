@@ -1,0 +1,85 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+  <lightning-card title="Product Form">
+    <div class="slds-p-horizontal_small">
+      <lightning-record-form
+        object-api-name={objectName}
+        record-type-id={recordTypeId}
+        fields={objectFields}
+        columns="2"
+        oncancel={handleCancel}
+        onsuccess={handleSuccess}
+        onrowselection={handleRowSelection}
+      >
+      </lightning-record-form>
+    </div>
+
+    <div style="display:flex; justify-content: space-between;">
+    <lightning-combobox
+          name="Item Type"
+          label="Item Type"
+          value=""
+          placeholder="Select Type"
+          options={items}
+          onchange={handleChange} ></lightning-combobox>
+
+          <lightning-combobox
+          name="Sheet Type"
+          label="Sheet Type"
+          value=""
+          placeholder="Select Type"
+          options={sheets}
+          onchange={handle} ></lightning-combobox>
+
+          <lightning-combobox
+          name="Category"
+          label="Category"
+          value=""
+          placeholder="Select category"
+          options={categories}
+          onchange={handleCha} ></lightning-combobox>
+
+          <lightning-combobox
+          name="Sheet Width"
+          label="Sheet Width"
+          value=""
+          placeholder="Select Width"
+          options={widths}
+          onchange={handlewidth} ></lightning-combobox>
+          <lightning-button label="Search" variant="brand" onclick={handleSearch}></lightning-button>
+      </div>
+<div>
+   <lightning-datatable
+      key-field="Id"
+      data={products}
+      show-row-number-column
+      row-number-offset={rowOffset}
+      suppress-bottom-bar
+      columns={columns}
+      onrowselection={handleRowSelection}>
+
+  </lightning-datatable> 
+</div>
+  <lightning-button label="Add More" variant="brand" onclick={handleNext}></lightning-button>   
+
+  <lightning-button label="Show Inserted" variant="brand" onclick={handleInserted}></lightning-button>   
+  
+
+  <div>
+    <lightning-datatable
+       key-field="Id"
+       data={insertedproductparts}
+       show-row-number-column
+
+       suppress-bottom-bar
+       columns={Addcolumns}>
+       
+ 
+   </lightning-datatable> 
+ </div>
+
+
+
+  </lightning-card>
+</template>

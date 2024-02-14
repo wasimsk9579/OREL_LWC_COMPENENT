@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Product Bundle Search">
+        <div class="slds-p-around_medium">
+            <lightning-input label="Search" onchange={handleSearchChange}></lightning-input>
+            <template if:true={products}>
+                <template for:each={products} for:item="product">
+                    <div key={product.Id} onclick={handleProductClick} data-product-id={product.Id}>
+                        {product.Name}
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+    <template if:true={selectedProductId}>
+        <c-childproducts product2-id={selectedProductId}></c-childproducts>
+    </template>
+</template>

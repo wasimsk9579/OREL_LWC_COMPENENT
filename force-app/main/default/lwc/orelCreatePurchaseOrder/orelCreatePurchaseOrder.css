@@ -1,0 +1,11 @@
+.resetButtonWrapper{
+	position: relative;
+}
+.resetButton{
+	position: absolute;
+	right: 0;
+}
+.delectIcon{
+	margin-top: 24px;
+	cursor: pointer;
+}

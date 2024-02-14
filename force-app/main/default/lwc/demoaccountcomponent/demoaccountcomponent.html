@@ -1,0 +1,122 @@
+<template>
+    <template if:false={variable}>
+        <lightning-card title="Return Order" icon-name="standard:lead_list">
+            <!-- Search records -->
+        <!-- <div class="inputCard">
+            <lightning-input
+                style="width:30%;"
+                type="text"
+                placeholder="Search"
+                onchange={handleSearch}>
+            </lightning-input>
+        </div> -->
+
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table--header-fixed slds-box" aria-labelledby="element-with-table-label other-element-with-table-label">
+      <thead class="slds-p-bottom_medium">
+        <tr class="slds-line-height_reset">
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Name">Name</div>
+          </th>
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Customer">Customers</div>
+          </th>
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Order date">Order date</div>
+          </th>
+          
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Initiate Date">Initiate Date</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Delivery Date">Delivery Date</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Delivery Recipient">Delivery Recipient</div>
+            </th>         
+            
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Return Status">Return Status</div>
+            </th>
+            <th>
+              <div class="slds-truncate" title="Preview PDF">Preview PDF</div>
+            </th>  
+            <th>
+              <div class="slds-truncate" title="View Products">View products</div>
+            
+            </th> 
+        </tr>
+      </thead>
+      <tbody>
+        <template for:each={tableData} for:item="obj">
+          <tr class="inputRows" key={obj.Id}>
+            <th data-label="Name" scope="row" data-id={obj.Id} >{obj.Name}</th>
+            <td data-label="Customer" data-id={obj.Id} >{obj.customerName}</td>
+            <td data-label="Order date" data-id={obj.Id} >{obj.Orderdate}</td>
+              <td data-label="Initiate Date" data-id={obj.Id}>{obj.InitiateDate}</td>
+              <td data-label="Delivery Date" data-id={obj.Id}>{obj.DeliveryDate} </td>
+              <td data-label="Delivery Recipient" data-id={obj.Id}> {obj.deliveryrecipient}</td>  
+              <td data-label="Return Status" data-id={obj.Id}>
+                <lightning-combobox 
+                name="Return Status" 
+                data-id={obj.Id} 
+                value={obj.Orl_Return_Status__c}  
+                placeholder="Select return order Status" 
+                options={optionDataVal} 
+                onchange={handleChange}></lightning-combobox>
+              </td> 
+              <td>
+                <div>
+                  <lightning-button variant="brand" name="Preview PDF" label="Preview PDF" onclick={handlepdfclick}></lightning-button>
+                </div>
+              </td>  
+              <td>
+                <div>
+                  <lightning-button variant="brand" name="View products" label="View products" onclick={handleprdctclick}></lightning-button>
+                </div>
+              </td>        
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <!-- <div class="pageHandler">
+        <lightning-button class="buttons" label="Previous" onclick={handlePrevious} disabled={isFirstPage}></lightning-button>
+        <div class="buttonText">Page {currentPage} of {totalPages}</div>
+        <lightning-button class="buttons" label="Next" onclick={handleNext} disabled={isLastPage}></lightning-button>
+    </div> -->
+
+<template if:true={isvariable}>
+    
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open custom-modal-size">
+                <div class="slds-modal__container">
+                    <!-- Modal Header -->
+                    <header class="slds-modal__header">
+                        <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={handleCancel}>
+                            <span class="slds-assistive-text">Close</span>
+                        </lightning-button-icon>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Preview PDF</h2>
+                    </header>
+        
+                    <!-- Modal Body -->
+                    <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                        <iframe src={iframeSrc} style="width: 100%; height:500px;"></iframe>
+                    </div>
+                    
+                    <!-- Modal Footer -->
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="brand" onclick={handleCancel} name="submit" class="slds-var-m-left_x-small"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </template>
+    </lightning-card>
+    </template>
+    
+        <template if:true={variable}>
+        
+            <div class="backButton">
+                <lightning-button variant="base" label="Back" title="Back to return order list" icon-name="utility:back" onclick={handleBackToReturnList} class="slds-m-left_x-small"></lightning-button>
+            </div>
+             <c-getproductinfo order-id={clickedreturnId}></c-getproductinfo> 
+        </template>
+   
+</template>

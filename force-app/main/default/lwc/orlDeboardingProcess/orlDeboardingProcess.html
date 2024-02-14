@@ -1,0 +1,10 @@
+<!-- orlDeboardingProcess.html -->
+<template>
+    <lightning-card title="Deboarding Request">
+        <textarea data-id="commentInput" placeholder="Enter your comments..." oninput={handleCommentChange}></textarea>
+        <div class="button-group">
+            <lightning-button label="Submit" onclick={submitDeboardingRequest}></lightning-button>
+            <lightning-button if:true={isCancelButtonVisible} label="Cancel" onclick={cancelDeboarding}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

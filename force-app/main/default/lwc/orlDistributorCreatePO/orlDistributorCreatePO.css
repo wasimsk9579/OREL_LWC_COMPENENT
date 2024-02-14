@@ -1,0 +1,16 @@
+lightning-layout{
+    margin: 20px 5px 20px 5px;
+    position: relative;
+}
+.nextButton{
+    position: absolute;
+    right: 10px;
+}
+.backButton{
+    position: absolute;
+    left: 10px;
+}
+.submitButton{
+    position: absolute;
+    right: 10px;
+}
